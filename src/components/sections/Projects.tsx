@@ -1,13 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { GithubIcon } from './icons';
-
-interface Project {
-  title: string;
-  desc: string;
-  tags: string[];
-  github: string;
-}
+import { projects, type Project } from '../../data/profile';
+import { GithubIcon } from '../ui';
 
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -97,21 +91,6 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
 };
 
 const Projects: React.FC = () => {
-  const projects = [
-    {
-      title: "多 Agent AI 投资分析系统",
-      desc: "一个多 Agent 协同的 AI 分析助手，融合行情数据、财经新闻和知识库检索，由不同 Agent 分工处理并提供分析结果。",
-      tags: ["Python", "LangChain", "LLMs", "RAG"],
-      github: "https://github.com/LiuAHao/ai_investment"
-    },
-    {
-      title: "Go Agent Platform",
-      desc: "一个本地优先的 Agent Studio。采用“云端分发、本地执行”思路，支持快速创建 Agent、挂载 Skill 和 MCP 插件。前后端分离设计，并接入了 Electron 桌面端。",
-      tags: ["Go", "React", "Electron", "MCP"],
-      github: "https://github.com/LiuAHao/go-agent-platform"
-    }
-  ];
-
   return (
     <section id="projects" className="py-32 px-6 border-t border-border bg-background" style={{ perspective: "1000px" }}>
       <div className="max-w-4xl mx-auto">

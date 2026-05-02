@@ -1,43 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-
-const keywords = [
-  { text: "Southeast University", size: "lg" },
-  { text: "AI Agents", size: "lg" },
-  { text: "Backend Systems", size: "lg" },
-  { text: "ByteDance", size: "md" },
-  { text: "Tencent", size: "md" },
-  { text: "Software Dev", size: "md" },
-  { text: "C++", size: "md" },
-  { text: "Quant Strategies", size: "md" },
-  { text: "Financial Freedom", size: "md" },
-  { text: "Stock Trading", size: "sm" },
-  { text: "Gemini", size: "sm" },
-  { text: "Claude Code", size: "sm" },
-  { text: "Codex", size: "sm" },
-  { text: "LangChain", size: "sm" },
-  { text: "Minecraft", size: "sm" },
-  { text: "Zenless Zone Zero", size: "sm" },
-  { text: "Basketball", size: "sm" },
-  { text: "Volleyball", size: "sm" },
-  { text: "Fitness", size: "sm" },
-  { text: "Photography", size: "sm" },
-  { text: "Travel", size: "sm" },
-  { text: "Music & Singing", size: "sm" },
-  { text: "Jay Chou", size: "sm" },
-  { text: "David Tao", size: "sm" },
-  { text: "KUN", size: "sm" },
-  { text: "ISFJ", size: "sm" },
-  { text: "Goal-Oriented", size: "sm" },
-  { text: "Mac Lover", size: "sm" },
-  { text: "Calm & Steady", size: "sm" }
-];
+import { keywords, type KeywordSize } from '../../data/profile';
 
 const sizeMap = {
   sm: { px: 20, py: 10, fontSize: 14, baseRadius: 40 },
   md: { px: 24, py: 12, fontSize: 16, baseRadius: 50 },
   lg: { px: 32, py: 16, fontSize: 18, baseRadius: 60 }
-};
+} satisfies Record<KeywordSize, { px: number; py: number; fontSize: number; baseRadius: number }>;
 
 const About: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,8 +26,8 @@ const About: React.FC = () => {
     
     physicsRef.current = keywords.map((kw, i) => {
       const el = bubblesRef.current[i];
-      const w = el ? el.offsetWidth : sizeMap[kw.size as keyof typeof sizeMap].baseRadius * 2;
-      const h = el ? el.offsetHeight : sizeMap[kw.size as keyof typeof sizeMap].baseRadius;
+      const w = el ? el.offsetWidth : sizeMap[kw.size].baseRadius * 2;
+      const h = el ? el.offsetHeight : sizeMap[kw.size].baseRadius;
       
       // Spawn at random positions inside the container
       return {
@@ -186,8 +155,8 @@ const About: React.FC = () => {
               ref={el => { bubblesRef.current[i] = el; }}
               className="absolute left-0 top-0 rounded-full flex items-center justify-center whitespace-nowrap text-primary cursor-default"
               style={{
-                padding: `${sizeMap[kw.size as keyof typeof sizeMap].py}px ${sizeMap[kw.size as keyof typeof sizeMap].px}px`,
-                fontSize: `${sizeMap[kw.size as keyof typeof sizeMap].fontSize}px`,
+                padding: `${sizeMap[kw.size].py}px ${sizeMap[kw.size].px}px`,
+                fontSize: `${sizeMap[kw.size].fontSize}px`,
                 // Translucent Glassmorphism styles
                 backgroundColor: "rgba(255, 255, 255, 0.03)",
                 backdropFilter: "blur(12px)",

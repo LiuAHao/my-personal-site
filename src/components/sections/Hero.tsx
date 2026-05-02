@@ -1,50 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
-import { GithubIcon } from './icons';
+import { profile } from '../../data/profile';
+import { DecryptedText, GithubIcon } from '../ui';
 
-const DecryptedText: React.FC<{ text: string; delay?: number }> = ({ text, delay = 0 }) => {
-  const [displayText, setDisplayText] = useState('');
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
-
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    let iteration = 0;
-    let interval: ReturnType<typeof setInterval>;
-
-    timeout = setTimeout(() => {
-      interval = setInterval(() => {
-        setDisplayText(
-          text
-            .split('')
-            .map((letter, index) => {
-              if (index < iteration) {
-                return text[index];
-              }
-              if (letter === ' ') return ' ';
-              return chars[Math.floor(Math.random() * chars.length)];
-            })
-            .join('')
-        );
-
-        if (iteration >= text.length) {
-          clearInterval(interval);
-        }
-
-        iteration += 1 / 3; // Controls the speed of decryption
-      }, 30);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }, [text, delay]);
-
-  return <span className="font-mono">{displayText || '\u00A0'}</span>;
-};
-
-const Hero: React.FC = () => {
+const Hero = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-start relative pt-32 px-6 max-w-4xl mx-auto">
       <div className="w-full z-10">
@@ -54,7 +13,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <h1 className="text-5xl md:text-7xl font-semibold tracking-tight text-primary mb-6">
-            Hi, I'm <span className="text-primary pr-2">LiuAHao</span>.
+            Hi, I'm <span className="text-primary pr-2">{profile.name}</span>.
           </h1>
         </motion.div>
         
@@ -64,7 +23,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
         >
           <p className="text-xl md:text-2xl text-secondary mb-12 max-w-[65ch] font-normal leading-relaxed h-[64px] md:h-[32px]">
-            <DecryptedText text="Architecting intelligent systems through elegant code and boundless curiosity." delay={500} />
+            <DecryptedText text={profile.tagline} delay={500} />
           </p>
         </motion.div>
 
@@ -78,7 +37,7 @@ const Hero: React.FC = () => {
             View Projects
             <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
           </a>
-          <a href="https://github.com/LiuAHao" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-secondary hover:text-primary transition-colors font-medium text-lg">
+          <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-secondary hover:text-primary transition-colors font-medium text-lg">
             <GithubIcon size={20} />
             GitHub
           </a>

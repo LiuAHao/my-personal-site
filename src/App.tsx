@@ -1,9 +1,5 @@
-import Background from './components/Background';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import TechStack from './components/TechStack';
-import Contact from './components/Contact';
+import Background from './components/layout/Background';
+import { About, Contact, Hero, Projects, TechStack } from './components/sections';
 
 function App() {
   return (

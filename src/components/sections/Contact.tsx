@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Globe } from 'lucide-react';
-import { GithubIcon } from './icons';
+import { profile } from '../../data/profile';
+import { GithubIcon } from '../ui';
 
 const Contact: React.FC = () => {
   return (
@@ -16,12 +17,12 @@ const Contact: React.FC = () => {
           <h2 className="text-xs font-mono uppercase tracking-widest text-secondary mb-12">/ Contact</h2>
           
           <p className="text-xl text-primary mb-12 max-w-[65ch] font-light leading-relaxed">
-            随时欢迎交流探讨 AI 工程、后端架构或是任何有趣的开源合作。
+            {profile.contactIntro}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6">
             <a 
-              href="mailto:2659414541@qq.com" 
+              href={`mailto:${profile.email}`} 
               className="flex items-center gap-3 text-secondary hover:text-primary transition-colors py-2"
             >
               <Mail size={18} />
@@ -29,7 +30,7 @@ const Contact: React.FC = () => {
             </a>
 
             <a 
-              href="https://github.com/LiuAHao" 
+              href={profile.githubUrl} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-3 text-secondary hover:text-primary transition-colors py-2"
@@ -49,7 +50,7 @@ const Contact: React.FC = () => {
         </motion.div>
         
         <div className="mt-32 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs font-mono text-secondary">
-          <span>&copy; {new Date().getFullYear()} LiuAHao.</span>
+          <span>&copy; {new Date().getFullYear()} {profile.name}.</span>
           <span className="mt-2 sm:mt-0">Crafted with React & Tailwind</span>
         </div>
       </div>
